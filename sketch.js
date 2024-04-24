@@ -7,6 +7,9 @@ const RES = 8
 
 let image
 
+let start = false
+
+let startBtn
 let slider
 let grid
 let cols
@@ -18,11 +21,23 @@ function setup() {
   cols = floor(width / RES)
   rows = floor(height / RES)
   
-  grid = makeMatrix(cols, rows)
+  grid = makeGrid(cols, rows)
   
   slider = createSlider(1,60,1);
-  slider.position(WIDTH - 200, HEIGHT + 10);
+  slider.position(WIDTH - 200, HEIGHT + 50);
   slider.style('width', '200px');
+
+  startBtn = createButton('Start');
+  startBtn.position(WIDTH - 130, HEIGHT + 10);
+  startBtn.mousePressed(play)
+  startBtn.size(60, 30)
+  startBtn.style("font-size", "16px");
+
+  resetBtn = createButton('Reset');
+  resetBtn.position(WIDTH - 60, HEIGHT + 10);
+  resetBtn.mousePressed(reset)
+  resetBtn.size(60, 30)
+  resetBtn.style("font-size", "16px");
 }
 
 function draw() {
@@ -32,22 +47,37 @@ function draw() {
   for (let i = 0; i < cols; i++){
     for(let j = 0; j < rows; j++){
       grid[i][j].show()
-      
-      let neighbors = countNeighbors(i, j)
+    }
+  }
 
-      grid[i][j].updateState(neighbors)
+  if(start){
+    for (let i = 0; i < cols; i++){
+      for(let j = 0; j < rows; j++){
+        let neighbors = countNeighbors(i, j)
+        grid[i][j].updateState(neighbors)
+      }
     }
   }
   
 }
 
 function preload() {
-  image = loadImage("pv80.jpg");
+  image = loadImage("examples/arvore.jpg");
 }
 
-const TRESH = 140
+function play(){
+  start = !start
+  
+  if(!start){
+    startBtn.html("Start")
+  } else {
+    startBtn.html("Stop")
+  }
+}
 
-function makeMatrix(cols, rows){
+function makeGrid(cols, rows){
+  const TRESH = 140
+
   let arr = new Array(cols)
   
   let w = width / 80;
@@ -67,7 +97,7 @@ function makeMatrix(cols, rows){
       
       let state = 0
       
-      if(avg > TRESH){
+      if(avg < TRESH){
         state = 1
       }
         
@@ -94,4 +124,26 @@ function countNeighbors(x, y){
   }
   
   return sum
+}
+
+function mouseClicked() {
+  if (mouseX >= 0 && mouseX < WIDTH && mouseY >= 0 && mouseY < HEIGHT) {
+    let col = floor(mouseX / RES);
+    let row = floor(mouseY / RES);
+    
+    if(grid[col][row].state===0){
+      grid[col][row].state = 1;
+      grid[col][row].previous =  grid[col][row].state;
+    } else{
+      grid[col][row].state = 0;
+      grid[col][row].previous =  grid[col][row].state;
+    }
+    
+  }
+}
+
+function reset(){
+  grid = makeGrid(cols, rows)
+  start = false
+  startBtn.html("Start")
 }
