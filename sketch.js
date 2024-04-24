@@ -42,10 +42,10 @@ function draw() {
 }
 
 function preload() {
-  image = loadImage("pv80.jpg");
+  image = loadImage("img.png");
 }
 
-const TRESH = 140
+const TRESH = 90
 
 function makeMatrix(cols, rows){
   let arr = new Array(cols)
