@@ -76,7 +76,7 @@ function play(){
 }
 
 function makeGrid(cols, rows){
-  const TRESH = 140
+  const TRESH = 90
 
   let arr = new Array(cols)
   
