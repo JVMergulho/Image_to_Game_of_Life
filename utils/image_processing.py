@@ -9,6 +9,7 @@ if len(sys.argv)< 2:
     sys.exit("Number of arguments does not match the required: you must inform <path/to/input/image>")
 
 img_path =  sys.argv[1]
+#python utils/image_processing.py path_to_image
 
 img = Image.open(img_path) 
 
@@ -31,4 +32,8 @@ img_name, img_ext = os.path.splitext(os.path.basename(img_path))
 # resize the image
 output = img_no_bg.resize(NEWSIZE)
 
-output.save('../examples/'+img_name+'_no_bg.png') 
+#save image used
+output.save('examples/'+img_name+'_no_bg.png') 
+
+#save image for grid
+output.save('examples/input_img_no_bg.png') 
