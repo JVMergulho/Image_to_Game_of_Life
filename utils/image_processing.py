@@ -32,8 +32,13 @@ img_name, img_ext = os.path.splitext(os.path.basename(img_path))
 # resize the image
 output = img_no_bg.resize(NEWSIZE)
 
+output_file_name = 'examples/'+img_name+'_no_bg.png'
 #save image used
 output.save('examples/'+img_name+'_no_bg.png') 
 
+print(output_file_name)
+
 #save image for grid
 output.save('examples/input_img_no_bg.png') 
+
+print()
