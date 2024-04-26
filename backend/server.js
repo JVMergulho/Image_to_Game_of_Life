@@ -6,6 +6,8 @@ const cors = require('cors')
 // import router
 const router = express.Router()
 
+const ProcessImage = require('./process_image')
+
 const upload = require("./config/multer")
 
 // use the PORT in .env or 3000 if it does not exist
@@ -27,4 +29,4 @@ app.use('/', router);
 app.listen(port, () => console.log("Server started on port ", port))
 
 // Routes
-router.post('/upload', upload.single('file'))
+router.post('/upload', upload.single('file'), ProcessImage)
