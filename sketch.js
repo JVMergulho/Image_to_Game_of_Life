@@ -62,7 +62,7 @@ function draw() {
 }
 
 function preload() {
-  image = loadImage("examples/arvore.jpg");
+  image = loadImage("examples/input_img_no_bg.png");
 }
 
 function play(){
@@ -97,7 +97,7 @@ function makeGrid(cols, rows){
       
       let state = 0
       
-      if(avg < TRESH){
+      if(avg > TRESH){
         state = 1
       }
         
