@@ -17,8 +17,8 @@ const process_image = async (req, res) => {
     try {
         const file = req.file;
         const imagePath = file.path; // Path to the uploaded image
-        const outputPath = './uploads/'+ file.filename.replace(/\.(jpg|jpeg)$/i, '.png');
-        // Obs. A imagem de input pode estar com outras extensões, jpeg, png...
+        const outputPath = './uploads/'+ file.filename.replace(/\.(jpg|jpeg|png)$/i, '.png');
+        // Obs. A imagem de input pode estar com outras extensões, jpg, jpeg, png...
 
         console.log('Image Path:', imagePath);
         console.log('Output Image Path:', outputPath);
@@ -32,13 +32,13 @@ const process_image = async (req, res) => {
         // Redimensiona a imagem para 80x80
         await image.resize(80, 80);
 
-        // Salva a imagem redimensionada
-        await image.writeAsync(outputPath);
+        // Obtém o buffer da imagem redimensionada
+        const buffer = await image.getBufferAsync(Jimp.MIME_PNG);
 
-        // Logging success message
-        console.log('Background removed successfully.');
+        // Converte o buffer em uma string base64
+        const base64Data = buffer.toString('base64');
 
-        res.sendFile(path.resolve(outputPath));
+        res.json({ success: true, base64Data });
     } catch (error) {
         // Handle errors
         console.error('Error processing image:', error);

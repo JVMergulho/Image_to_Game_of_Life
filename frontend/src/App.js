@@ -7,6 +7,7 @@ const API_BASE = "http://localhost:4000"
 export default function App() {
 
   const [imageFile, setImageFile] = useState('')
+  const [imageSrc, setImageSrc] = useState('');
 
   async function uploadImage(ev){
     ev.preventDefault()
@@ -14,12 +15,22 @@ export default function App() {
     const data = new FormData();
     data.append('file', imageFile[0]);
   
-    const response = await fetch(API_BASE + '/upload', {
-      method: 'POST',
-      body: data
-    })
+    try {
+      const response = await fetch(API_BASE + '/upload', {
+        method: 'POST',
+        body: data
+      });
 
-    console.log(response)
+      if (response.ok) {
+        const responseData = await response.json();
+        setImageSrc(responseData.base64Data);
+      } else {
+        console.error('Erro ao fazer upload do arquivo:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar requisição:', error);
+    }
+
   }
 
   return (
@@ -35,5 +46,6 @@ export default function App() {
           <p>Enviar</p>
       </button>
     </form>
+    {imageSrc && <img src={`data:image/png;base64,${imageSrc}`} alt="imagem retornada"/>}
   </div>)
 }
