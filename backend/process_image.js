@@ -1,5 +1,6 @@
 const { removeBackground } = require('@imgly/background-removal-node');
-const fs = require('fs');
+const Jimp = require('jimp');
+const path = require('path');
 
 async function removeImageBackground(imgSource) {
     try{
@@ -16,7 +17,8 @@ const process_image = async (req, res) => {
     try {
         const file = req.file;
         const imagePath = file.path; // Path to the uploaded image
-        const outputPath = './uploads/'+ file.filename.replace('.jpg', '.png'); 
+        const outputPath = './uploads/'+ file.filename.replace(/\.(jpg|jpeg)$/i, '.png');
+        // Obs. A imagem de input pode estar com outras extensões, jpeg, png...
 
         console.log('Image Path:', imagePath);
         console.log('Output Image Path:', outputPath);
@@ -24,12 +26,19 @@ const process_image = async (req, res) => {
         // Perform background removal
         const resultDataURL = await removeImageBackground(imagePath)
 
-        fs.writeFileSync(outputPath, resultDataURL.split(';base64,').pop(), { encoding: 'base64' });
+        // Carrega a imagem com Jimp
+        const image = await Jimp.read(Buffer.from(resultDataURL.split(';base64,').pop(), 'base64'));
+
+        // Redimensiona a imagem para 80x80
+        await image.resize(80, 80);
+
+        // Salva a imagem redimensionada
+        await image.writeAsync(outputPath);
 
         // Logging success message
         console.log('Background removed successfully.');
 
-        res.json({ success: true, outputPath});
+        res.sendFile(path.resolve(outputPath));
     } catch (error) {
         // Handle errors
         console.error('Error processing image:', error);
