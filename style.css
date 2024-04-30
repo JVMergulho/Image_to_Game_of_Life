@@ -1,9 +1,31 @@
 html, body {
   height: 100%;
   margin: 0;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 40;
+  background-color: #F2E1CC;
+}
+
+.title {
+  font-size: 4em;
+  text-align: center;
+  color: #395D6E;
+}
+
+.firstColor{
+  color: #8ba3c7;
+}
+.secondColor{
+  color: #BFB749;
+}
+.thirdColor{
+  color: #F25E3D;
+}
+.fourthColor{
+  color: #590202;
 }
 
 canvas {
