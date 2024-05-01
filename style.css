@@ -1,4 +1,4 @@
-html, body {
+body {
   height: 100%;
   margin: 0;
   display: grid;
@@ -10,9 +10,11 @@ html, body {
 }
 
 .title {
-  font-size: 4em;
+  font-size: 500%;
+  display: grid;
   text-align: center;
-  color: #395D6E;
+  align-content: center;
+  margin: 0 auto;
 }
 
 .firstColor{
