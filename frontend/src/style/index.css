@@ -1,13 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Michroma&family=Rubik+Dirt&family=Rubik+Glitch&family=Rubik+Maze&family=Rubik:wght@500&family=Silkscreen&display=swap');
+
 body {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2E1CC;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.title {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 40;
+  font-size: 500%;
+  display: grid;
+  text-align: center;
+  align-content: center;
+  margin: 0 auto;
+}
+
+.firstColor{
+  color: #8ba3c7;
+}
+.secondColor{
+  color: #BFB749;
+}
+.thirdColor{
+  color: #F25E3D;
+}
+.fourthColor{
+  color: #590202;
+}
+
+canvas {
+  display: block;
+}
+
+button{
+  display: grid;
+  align-self: center;
+  justify-self: right;
+}
+
+form{
+  padding: 50px;
+}
+
+#contentAndControl{
+  display: flex;
 }

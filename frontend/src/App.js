@@ -35,17 +35,29 @@ export default function App() {
 
   return (
   <div>
-    <ReactP5Wrapper sketch={sketch} />
-    <form>
-      <div className="form-field">
-          <label htmlFor="uploadImage">Faça o upload de uma imagem</label>
-          <input type="file" id="uploadImage" name="imageFile"
-          onChange={ev => setImageFile(ev.target.files)}/>
-      </div>
-      <button className="simple-button" id="create-button" onClick={(uploadImage)}>
-          <p>Enviar</p>
-      </button>
-    </form>
+    <section className="title">
+      <p id="titleText">
+        <span className="firstColor">C</span><span className="secondColor">o</span><span className="thirdColor">n</span><span className="fourthColor">w</span><span className="firstColor">a</span><span className="secondColor">y</span><span className="thirdColor">'</span><span className="fourthColor">s</span>
+        <span className="firstColor">G</span><span className="secondColor">a</span><span className="thirdColor">m</span><span className="fourthColor">e</span>
+        <span className="firstColor">o</span><span className="secondColor">f</span> 
+        <span className="thirdColor">L</span><span className="fourthColor">i</span><span className="firstColor">f</span><span className="secondColor">e</span>
+        <span className="thirdColor">w</span><span className="fourthColor">i</span><span className="firstColor">t</span><span className="secondColor">h</span>
+        <span className="thirdColor">i</span><span className="fourthColor">m</span><span className="firstColor">a</span><span className="secondColor">g</span><span className="thirdColor">e</span><span className="fourthColor">s</span>
+      </p>
+    </section>
+    <div id="contentAndControl"> 
+      <ReactP5Wrapper sketch={sketch} />
+      <form>
+        <div className="form-field">
+            <label htmlFor="uploadImage">Faça o upload de uma imagem</label>
+            <input type="file" id="uploadImage" name="imageFile"
+            onChange={ev => setImageFile(ev.target.files)}/>
+        </div>
+        <button className="simple-button" id="create-button" onClick={(uploadImage)}>
+            <p>Enviar</p>
+        </button>
+      </form>
+    </div>
     {imageSrc && <img src={`data:image/png;base64,${imageSrc}`} alt="imagem retornada"/>}
   </div>)
 }

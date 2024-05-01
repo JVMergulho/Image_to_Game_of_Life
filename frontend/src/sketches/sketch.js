@@ -27,14 +27,14 @@ export default function sketch(p5) {
       p5.stroke(0);
       // If the cell is born, color it blue!
       if (this.previous === 0 && this.state == 1) {
-        p5.fill(100, 100, 255);
+        p5.fill("#8ba3c7");
       } else if (this.state == 1) {
         p5.fill(0);
         // If the cell dies, color it red!
       } else if (this.previous == 1 && this.state === 0) {
-        p5.fill(255, 150, 150);
+        p5.fill("#F25E3D");
       } else {
-        p5.fill(255);
+        p5.fill("#F2E1CC");
       }
       p5.square(this.x, this.y, this.w);
   
